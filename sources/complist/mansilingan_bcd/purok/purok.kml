@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>BRGY MANSILINGAN</name>
+    <NetworkLink>
+      <name>PUROK BACOLOD CITY</name>
+      <Link>
+        <href><![CDATA[https://www.google.com/maps/d/kml?forcekml=1&mid=1f43hil8CRpecBHo3qsXLXoThTyCi7qk&lid=_m0kwVxzwXA]]></href>
+      </Link>
+    </NetworkLink>
+  </Document>
+</kml>

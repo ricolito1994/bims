@@ -1,0 +1,14 @@
+.google-maps-btns{
+    padding : 1%;
+	top:0;
+	
+}
+.google-maps-btns a{
+	font-size:22px;
+    padding: 0;
+}
+
+.google-maps-btns a:hover{
+    cursor:pointer;
+	
+}

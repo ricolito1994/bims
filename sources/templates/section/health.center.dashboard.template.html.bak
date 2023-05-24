@@ -1,0 +1,5 @@
+<div id="healthcenter-dashboard" data-controller="HealthCenterDashboardController" class="">
+	<div>
+		DASHBOARD
+	</div>
+</div>

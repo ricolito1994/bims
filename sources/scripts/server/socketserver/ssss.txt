@@ -1,0 +1,59 @@
+import sys
+import os
+import socket
+sys.path.insert(1,os.path.abspath("./pyzk"))
+from zk import ZK, const
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM);
+s.connect(("127.0.0.1", 8090))
+
+#s.listen(5)
+conn = None
+# create ZK instance
+zk = ZK('192.168.30.8', port=4370, timeout=5, password=0, force_udp=False, ommit_ping=False)
+c="connected"
+s.send(bytes(c.encode()))
+try:
+	# connect to device
+    conn = zk.connect()
+    # disable device, this method ensures no activity on the device while the process is run
+    conn.disable_device()
+    # another commands will be here!
+    # Example: Get All Users
+    users = conn.get_users()
+    print (conn.get_firmware_version())
+    print (conn.get_serialnumber())
+    print (conn.get_device_name())
+    print (conn.get_platform())
+    # print ('firmware')
+    # print (conn.get_attendance())	
+    # for user in users:
+    #     privilege = 'User'
+    #     if user.privilege == const.USER_ADMIN:
+    #         privilege = 'Admin'
+    #     print ('aa')
+    #     print ('+ UID #{}'.format(user.uid))
+    #     print ('  Name       : {}'.format(user.name))
+    #     print ('  Privilege  : {}'.format(privilege))
+    #     print ('  Password   : {}'.format(user.password))
+    #     print ('  Group ID   : {}'.format(user.group_id))
+    #     print ('  User  ID   : {}'.format(user.user_id))
+
+    for attendance in conn.live_capture():
+        #clientsocket,address = s.accept();
+        if attendance is None:
+             # implement here timeout logic
+            pass
+        else:
+            print (attendance)
+            s.send(bytes(str(attendance).encode()))
+            #clientsocket.send(bytes(attendance,"utf-8"))
+    # Test Voice: Say Thank You
+    conn.test_voice()
+    # re-enable device after all commands already executed
+    conn.enable_device()
+except Exception as e:
+    print ("Process terminate : {}".format(e))
+finally:
+    if conn:
+        conn.disconnect()
